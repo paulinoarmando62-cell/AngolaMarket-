@@ -1,16 +1,16 @@
 
-export type UserRole = 'admin' | 'producer' | 'affiliate' | 'client' | 'driver';
+export type UserRole = 'admin' | 'producer' | 'affiliate' | 'client';
 
 export interface UserProfile {
-  uid: string;
+  id: string; // mapping to Supabase auth.uid()
   email: string;
   name: string;
   role: UserRole;
   phone?: string;
   iban?: string;
   balance: number;
-  createdAt: number;
-  isApproved?: boolean; // For producers/drivers
+  created_at: string;
+  is_approved?: boolean; // For producers
 }
 
 export interface Address {
