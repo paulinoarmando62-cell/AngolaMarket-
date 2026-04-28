@@ -1,0 +1,13 @@
+{
+  "name": "AngolaMarket",
+  "description": "Marketplace angolano com sistema de afiliados, entregas integradas e suporte a pagamentos locais.",
+  "requestFramePermissions": [
+    "camera",
+    "geolocation"
+  ],
+  "majorCapabilities": [
+    "E-commerce",
+    "Affiliate System",
+    "Logistics Management"
+  ]
+}
