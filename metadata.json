@@ -1,0 +1,6 @@
+{
+  "name": "AngolaMarket",
+  "description": "Plataforma de comércio eletrónico em Angola com compras online, produtores locais, sistema de afiliados e entregas rápidas.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

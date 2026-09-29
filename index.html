@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="pt-AO">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+    <title>AngolaMarket – O Maior Marketplace de Angola</title>
+    <meta name="description" content="Compre produtos com entrega rápida em Luanda e províncias, venda como produtor e lucre comissões no melhor programa de afiliados de Angola." />
+    <meta name="keywords" content="AngolaMarket, compras online angola, multicaixa express, afiliados angola, produtores angola, luanda compras" />
+    
+    <!-- PWA & Mobile Web App meta tags -->
+    <meta name="theme-color" content="#0052cc" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="AngolaMarket" />
+    <meta name="application-name" content="AngolaMarket" />
+    
+    <!-- Icons -->
+    <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+    <link rel="alternate icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    
+    <!-- OpenGraph Social Cards -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="AngolaMarket – O Maior Marketplace de Angola" />
+    <meta property="og:description" content="Compre produtos com entrega rápida em Luanda e províncias, venda como produtor e lucre comissões no melhor programa de afiliados de Angola." />
+    <meta property="og:site_name" content="AngolaMarket" />
+    <meta property="og:image" content="/pwa-512x512.png" />
+    
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="AngolaMarket – O Maior Marketplace de Angola" />
+    <meta name="twitter:description" content="Compre online com segurança via Multicaixa Express, PayPay e transferência. Ganhe como afiliado e venda como produtor." />
+    <meta name="twitter:image" content="/pwa-512x512.png" />
+
+    <!-- Google Fonts for crisp African/Global eCommerce typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://angolamarket.ao/#organization",
+          "name": "AngolaMarket",
+          "url": "https://angolamarket.ao",
+          "logo": "/icon.svg",
+          "description": "Marketplace e ecossistema de comércio eletrónico em Angola",
+          "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "AO",
+            "addressLocality": "Luanda"
+          }
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://angolamarket.ao/#website",
+          "url": "https://angolamarket.ao",
+          "name": "AngolaMarket",
+          "publisher": {
+            "@id": "https://angolamarket.ao/#organization"
+          },
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://angolamarket.ao/pesquisa?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        }
+      ]
+    }
+    </script>
+  </head>
+  <body class="bg-white text-slate-900 antialiased selection:bg-blue-600 selection:text-white">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
