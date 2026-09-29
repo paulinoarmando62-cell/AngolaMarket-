@@ -1258,42 +1258,82 @@ export const AdminDashboardView: React.FC = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
             <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200">
-              <span className="font-bold text-slate-900 block mb-1">Tabelas Preparadas:</span>
+              <span className="font-bold text-slate-900 block mb-1">Tabelas Preparadas (26 tabelas):</span>
               <p className="text-slate-500 leading-relaxed text-[11px]">
-                profiles, products, product_images, categories, orders, order_items, delivery_zones, affiliates, affiliate_links, affiliate_clicks, affiliate_sales, commissions, withdrawals, producer_wallets, affiliate_wallets, reviews, favorites, cart_items, coupons, banners, platform_settings.
+                profiles, producer_profiles, affiliate_profiles, producer_applications, affiliate_applications, categories, products, product_images, carts, cart_items, orders, order_items, order_status_history, delivery_zones, addresses, payments, affiliate_commissions, affiliate_withdrawals, wallet_transactions, favorites, reviews, notifications, audit_logs, platform_settings, coupons, banners.
               </p>
             </div>
 
             <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200">
-              <span className="font-bold text-slate-900 block mb-1">Políticas RLS:</span>
+              <span className="font-bold text-slate-900 block mb-1">Políticas RLS & Segurança:</span>
               <p className="text-slate-500 leading-relaxed text-[11px]">
-                Row Level Security configurada para que clientes só visualizem as suas encomendas, produtores gerenciem os seus produtos, e afiliados acessem apenas as suas comissões.
+                Row Level Security rigorosa para CLIENTE, PRODUTOR, AFILIADO e ADMIN. Clientes só consultam os seus pedidos e endereços; produtores apenas os seus produtos; afiliados apenas as suas comissões e levantamentos.
               </p>
             </div>
 
             <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200">
-              <span className="font-bold text-slate-900 block mb-1">Conexão em Produção:</span>
+              <span className="font-bold text-slate-900 block mb-1">Regras de Negócio Nativas:</span>
               <p className="text-slate-500 leading-relaxed text-[11px]">
-                Basta definir <code>VITE_SUPABASE_URL</code> e <code>VITE_SUPABASE_ANON_KEY</code> no seu arquivo <code>.env</code> para sincronização direta com a sua nuvem Supabase.
+                Taxa de 10% sobre venda do produtor e taxa de 200 Kz por levantamento de afiliado armazenadas em <code>platform_settings</code> com cálculo e validação em backend.
               </p>
+            </div>
+          </div>
+
+          {/* SQL Promotion Helper Box */}
+          <div className="p-4 rounded-2xl bg-blue-50 border border-blue-200 space-y-2">
+            <span className="font-bold text-xs text-blue-900 block">
+              Comando SQL para Promover o Primeiro Administrador:
+            </span>
+            <p className="text-[11px] text-blue-800 leading-relaxed">
+              Após rodar o <code>/supabase/schema.sql</code> e registar a sua conta na aplicação, execute este comando no <strong>SQL Editor</strong> do Supabase:
+            </p>
+            <div className="flex items-center justify-between p-2.5 bg-slate-900 text-emerald-300 font-mono text-xs rounded-xl overflow-x-auto">
+              <code>{`UPDATE public.profiles SET role = 'admin', status = 'active' WHERE email = 'paulinoarmando62@gmail.com';`}</code>
+              <button
+                type="button"
+                onClick={() => {
+                  navigator.clipboard.writeText(`UPDATE public.profiles SET role = 'admin', status = 'active' WHERE email = 'paulinoarmando62@gmail.com';`);
+                  setCopiedSql(true);
+                  setTimeout(() => setCopiedSql(false), 2000);
+                }}
+                className="ml-3 px-2 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded text-[10px] font-sans font-bold shrink-0"
+              >
+                {copiedSql ? 'Copiado!' : 'Copiar'}
+              </button>
             </div>
           </div>
 
           <div className="p-4 rounded-2xl bg-slate-900 text-slate-200 space-y-2 text-xs font-mono">
             <div className="flex justify-between items-center text-slate-400">
-              <span>Pré-visualização do script SQL (/supabase/schema.sql)</span>
+              <span>Arquivo: /supabase/schema.sql</span>
               <span className="text-[10px] text-emerald-400">PostgreSQL / Supabase 100% Compatível</span>
             </div>
             <pre className="text-[11px] overflow-x-auto text-emerald-300 max-h-48 p-2 bg-slate-950 rounded-xl">
-{`-- Criar tipos enum e tabelas
-CREATE TYPE app_role AS ENUM ('admin', 'producer', 'affiliate', 'client');
-CREATE TABLE profiles (id UUID PRIMARY KEY REFERENCES auth.users(id), role app_role...);
-CREATE TABLE products (id UUID PRIMARY KEY, price NUMERIC(14,2)...);
-CREATE TABLE orders (id TEXT PRIMARY KEY, customer_id UUID, total NUMERIC...);
-CREATE TABLE affiliate_sales (id UUID, affiliate_code TEXT, commission_amount NUMERIC...);
--- RLS Ativado em todas as tabelas
-ALTER TABLE orders ENABLE ROW LEVEL SECURITY;
-CREATE POLICY "Clients can view own orders" ON orders FOR SELECT USING (auth.uid() = customer_id);`}
+{`-- Estrutura Completa de Tabelas do AngolaMarket
+CREATE TABLE public.profiles (...);
+CREATE TABLE public.producer_profiles (...);
+CREATE TABLE public.affiliate_profiles (...);
+CREATE TABLE public.producer_applications (...);
+CREATE TABLE public.affiliate_applications (...);
+CREATE TABLE public.categories (...);
+CREATE TABLE public.products (...);
+CREATE TABLE public.product_images (...);
+CREATE TABLE public.carts (...);
+CREATE TABLE public.cart_items (...);
+CREATE TABLE public.orders (...);
+CREATE TABLE public.order_items (...);
+CREATE TABLE public.order_status_history (...);
+CREATE TABLE public.delivery_zones (...);
+CREATE TABLE public.addresses (...);
+CREATE TABLE public.payments (...);
+CREATE TABLE public.affiliate_commissions (...);
+CREATE TABLE public.affiliate_withdrawals (...);
+CREATE TABLE public.wallet_transactions (...);
+CREATE TABLE public.favorites (...);
+CREATE TABLE public.reviews (...);
+CREATE TABLE public.notifications (...);
+CREATE TABLE public.audit_logs (...);
+CREATE TABLE public.platform_settings (...);`}
             </pre>
           </div>
         </div>

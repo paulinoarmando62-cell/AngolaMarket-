@@ -76,6 +76,127 @@ export interface ProducerApplication {
   province: string;
   municipality: string;
   status: 'pending' | 'approved' | 'rejected' | 'suspended';
+  reviewedBy?: string;
+  reviewNotes?: string;
+  createdAt: string;
+  updatedAt?: string;
+}
+
+export interface AffiliateApplication {
+  id: string;
+  userId: string;
+  userName: string;
+  userEmail: string;
+  motivation?: string;
+  promotionChannels?: string;
+  status: 'pending' | 'approved' | 'rejected' | 'suspended';
+  reviewedBy?: string;
+  reviewNotes?: string;
+  createdAt: string;
+  updatedAt?: string;
+}
+
+export interface ProducerProfile {
+  id: string;
+  userId: string;
+  businessName: string;
+  description?: string;
+  phone?: string;
+  whatsapp?: string;
+  pickupAddress: string;
+  province: string;
+  municipality: string;
+  status: 'pending' | 'approved' | 'suspended' | 'rejected';
+  defaultAffiliateCommissionRate: number;
+  totalSales: number;
+  totalOrders: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface AffiliateProfile {
+  id: string;
+  userId: string;
+  affiliateCode: string;
+  status: 'pending' | 'approved' | 'suspended' | 'rejected';
+  commissionRate: number;
+  availableBalance: number;
+  pendingBalance: number;
+  totalEarned: number;
+  totalWithdrawn: number;
+  totalSalesCount: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface Address {
+  id: string;
+  userId: string;
+  recipientName: string;
+  phone: string;
+  province: string;
+  municipality: string;
+  neighborhood: string;
+  streetAddress: string;
+  referencePoint?: string;
+  isDefault: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface CartRecord {
+  id: string;
+  userId: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface CartItemRecord {
+  id: string;
+  cartId: string;
+  productId: string;
+  quantity: number;
+  priceAtAddition: number;
+  affiliateRef?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface OrderStatusHistory {
+  id: string;
+  orderId: string;
+  status: OrderStatus;
+  changedBy?: string;
+  notes?: string;
+  createdAt: string;
+}
+
+export interface Payment {
+  id: string;
+  orderId: string;
+  paymentMethod: PaymentMethod;
+  paymentStatus: 'pending' | 'verified' | 'failed' | 'paid_on_delivery';
+  transactionReference?: string;
+  receiptUrl?: string;
+  amount: number;
+  verifiedBy?: string;
+  verifiedAt?: string;
+  notes?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface WalletTransaction {
+  id: string;
+  userId: string;
+  userRole: UserRole;
+  type: 'credit' | 'debit' | 'withdrawal' | 'fee';
+  amount: number;
+  balanceBefore: number;
+  balanceAfter: number;
+  referenceType: 'order' | 'commission' | 'withdrawal' | 'adjustment';
+  referenceId?: string;
+  description: string;
   createdAt: string;
 }
 
@@ -220,6 +341,9 @@ export interface Commission {
   createdAt: string;
   updatedAt: string;
 }
+
+export type AffiliateCommission = Commission;
+export type AffiliateWithdrawal = WithdrawalRequest;
 
 export type WithdrawalMethod =
   | 'IBAN'
